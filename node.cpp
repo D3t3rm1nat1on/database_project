@@ -1,3 +1,4 @@
+#include <memory>
 #include <stdexcept>
 
 #include "node.h"
@@ -61,7 +62,7 @@ bool EventComparisonNode::Evaluate(const Date& date, const std::string& event)
     }
 }
 
-LogicalOperationNode::LogicalOperationNode(const LogicalOperation op, const std::shared_ptr<Node> left, const std::shared_ptr<Node> right)
+LogicalOperationNode::LogicalOperationNode(const LogicalOperation op, const std::shared_ptr<Node>& left, const std::shared_ptr<Node>& right)
 {
     _op = op;
     _left = left;
@@ -82,5 +83,5 @@ bool LogicalOperationNode::Evaluate(const Date& date, const std::string& event)
 
 bool EmptyNode::Evaluate(const Date& date, const std::string& event)
 {
-    return false;
+    return true;
 }

@@ -1,6 +1,7 @@
 #include "condition_parser.h"
 #include "node.h"
 #include "token.h"
+#include <memory>
 
 #include <map>
 

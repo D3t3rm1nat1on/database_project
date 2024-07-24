@@ -22,11 +22,6 @@ void TestAll();
 
 int main()
 {
-    {
-        istringstream is("date >= 2017-01-01 AND date < 2017-07-01");
-        shared_ptr<Node> root = ParseCondition(is);
-        std::cout << (root->Evaluate({ 2016, 12, 31 }, "") ? "true" : "false") << std::endl;
-    }
     TestAll();
 
     Database db;

@@ -1,7 +1,7 @@
 #pragma once
 
+#include <memory>
 #include <string.h>
-#include <memory.h>
 
 #include "date.h"
 
@@ -29,6 +29,7 @@ private:
 class DateComparisonNode : public Node {
 public:
     DateComparisonNode(const Comparison cmp, const Date& date);
+    virtual ~DateComparisonNode() {};
     bool Evaluate(const Date& date, const std::string& event) override;
 
 private:
@@ -39,6 +40,7 @@ private:
 class EventComparisonNode : public Node {
 public:
     EventComparisonNode(const Comparison cmp, const std::string& value);
+    virtual ~EventComparisonNode() {};
     bool Evaluate(const Date& date, const std::string& event) override;
 
 private:
@@ -48,7 +50,8 @@ private:
 
 class LogicalOperationNode : public Node {
 public:
-    LogicalOperationNode(const LogicalOperation op, const std::shared_ptr<Node> left, const std::shared_ptr<Node> right);
+    LogicalOperationNode(const LogicalOperation op, const std::shared_ptr<Node>& left, const std::shared_ptr<Node>& right);
+    virtual ~LogicalOperationNode() {};
     bool Evaluate(const Date& date, const std::string& event) override;
 
 private:
@@ -59,6 +62,7 @@ private:
 
 class EmptyNode : public Node {
 public:
+    virtual ~EmptyNode() {};
     bool Evaluate(const Date& date, const std::string& event) override;
 
 private:

@@ -9,6 +9,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(project)
 
+set (CMAKE_CXX_FLAGS "-Wall -Werror")
+
 include_directories(./)
 
 set(SOURCES

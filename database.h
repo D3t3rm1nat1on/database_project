@@ -23,10 +23,10 @@ struct Meta {
 class Database {
 public:
     void Add(const Date& date, const std::string& event);
-    void Print(std::ostream& os);
+    void Print(std::ostream& os) const;
     int RemoveIf(predicate_func);
-    std::vector<std::pair<Date, std::string>> FindIf(predicate_func predicate);
-    std::string Last(const Date& date);
+    std::vector<std::pair<Date, std::string>> FindIf(predicate_func predicate) const;
+    std::string Last(const Date& date) const;
 
 private:
     std::map<Date, Meta> database;
