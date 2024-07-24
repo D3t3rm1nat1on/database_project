@@ -3,14 +3,7 @@
 #include <stdexcept>
 
 #include "database.h"
-
-template <class Ch, class Tr, class Container>
-std::basic_ostream<Ch, Tr>& operator<<(std::basic_ostream<Ch, Tr>& os, Container const& x)
-{
-    for (auto& y : x)
-        os << y << " ";
-    return os;
-}
+#include "templates.h"
 
 void Database::Add(const Date& date, const std::string& event)
 {

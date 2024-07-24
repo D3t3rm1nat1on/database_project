@@ -1,12 +1,13 @@
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+
 #include "condition_parser.h"
 #include "database.h"
 #include "date.h"
 #include "node.h"
+#include "templates.h"
 #include "test_runner.h"
-
-#include <iostream>
-#include <sstream>
-#include <stdexcept>
 
 std::string ParseEvent(std::istream& is)
 {
@@ -88,7 +89,7 @@ int main()
 //         AssertEqual(events, std::vector<std::string> { "first event  ", "second event" }, "Parse multiple events");
 //     }
 // }
-// 
+//
 // void TestAll()
 // {
 //     TestRunner tr;
