@@ -49,24 +49,44 @@ bool operator!=(const Date& d1, const Date& d2)
     return d1.GetYear() != d2.GetYear() || d1.GetMonth() != d2.GetMonth() || d1.GetDay() != d2.GetDay();
 }
 
-bool operator>=(const Date& d1, const Date& d2)
-{
-    return d1.GetYear() >= d2.GetYear() || d1.GetMonth() >= d2.GetMonth() || d1.GetDay() >= d2.GetDay();
-}
-
-bool operator<=(const Date& d1, const Date& d2)
-{
-    return d1.GetYear() <= d2.GetYear() || d1.GetMonth() <= d2.GetMonth() || d1.GetDay() <= d2.GetDay();
-}
-
 bool operator>(const Date& d1, const Date& d2)
 {
-    return d1.GetYear() > d2.GetYear() || d1.GetMonth() > d2.GetMonth() || d1.GetDay() > d2.GetDay();
+    if (d1.GetYear() > d2.GetYear())
+        return true;
+
+    if (d1.GetYear() == d2.GetYear() && d1.GetMonth() > d2.GetMonth())
+        return true;
+
+    if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() > d2.GetDay())
+        return true;
+
+
+    return false;
 }
 
 bool operator<(const Date& d1, const Date& d2)
 {
-    return d1.GetYear() < d2.GetYear() || d1.GetMonth() < d2.GetMonth() || d1.GetDay() < d2.GetDay();
+    if (d1.GetYear() < d2.GetYear())
+        return true;
+
+    if (d1.GetYear() == d2.GetYear() && d1.GetMonth() < d2.GetMonth())
+        return true;
+
+    if (d1.GetYear() == d2.GetYear() && d1.GetMonth() == d2.GetMonth() && d1.GetDay() < d2.GetDay())
+        return true;
+
+
+    return false;
+}
+
+bool operator>=(const Date& d1, const Date& d2)
+{
+    return !(d1 < d2);
+}
+
+bool operator<=(const Date& d1, const Date& d2)
+{
+    return !(d1 > d2);
 }
 
 Date::Date()
