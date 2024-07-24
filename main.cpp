@@ -12,6 +12,8 @@
 std::string ParseEvent(std::istream& is)
 {
     std::string result;
+    while(is.peek() == ' ')
+        is.ignore();
     getline(is, result);
     return result;
 }
@@ -20,7 +22,12 @@ void TestAll();
 
 int main()
 {
-    // TestAll();
+    {
+        istringstream is("date >= 2017-01-01 AND date < 2017-07-01");
+        shared_ptr<Node> root = ParseCondition(is);
+        std::cout << (root->Evaluate({ 2016, 12, 31 }, "") ? "true" : "false") << std::endl;
+    }
+    TestAll();
 
     Database db;
 
@@ -71,28 +78,28 @@ int main()
     return 0;
 }
 
-// void TestParseEvent()
-// {
-//     {
-//         std::istringstream is("event");
-//         AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
-//     }
-//     {
-//         std::istringstream is("   sport event ");
-//         AssertEqual(ParseEvent(is), "sport event ", "Parse event with leading spaces");
-//     }
-//     {
-//         std::istringstream is("  first event  \n  second event");
-//         std::vector<std::string> events;
-//         events.push_back(ParseEvent(is));
-//         events.push_back(ParseEvent(is));
-//         AssertEqual(events, std::vector<std::string> { "first event  ", "second event" }, "Parse multiple events");
-//     }
-// }
-//
-// void TestAll()
-// {
-//     TestRunner tr;
-//     tr.RunTest(TestParseEvent, "TestParseEvent");
-//     tr.RunTest(TestParseCondition, "TestParseCondition");
-// }
+void TestParseEvent()
+{
+    {
+        std::istringstream is("event");
+        AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
+    }
+    {
+        std::istringstream is("   sport event ");
+        AssertEqual(ParseEvent(is), "sport event ", "Parse event with leading spaces");
+    }
+    {
+        std::istringstream is("  first event  \n  second event");
+        std::vector<std::string> events;
+        events.push_back(ParseEvent(is));
+        events.push_back(ParseEvent(is));
+        AssertEqual(events, std::vector<std::string> { "first event  ", "second event" }, "Parse multiple events");
+    }
+}
+
+void TestAll()
+{
+    TestRunner tr;
+    tr.RunTest(TestParseEvent, "TestParseEvent");
+    tr.RunTest(TestParseCondition, "TestParseCondition");
+}
